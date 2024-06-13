@@ -1,0 +1,27 @@
+.homeCustomWidth {
+    width: 40rem;
+    margin: 0 auto;
+    height: 100%;
+    place-content: center;
+
+    @media (max-width: 768px) {
+        width: auto;
+    }
+}
+
+.homeCustomWhenClick {
+    transform: translate(0, -50%);
+}
+
+.absoluteScreen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.backgroundImage {
+    background-image: url(../src/assets/hero-image.png);
+    background-repeat: none;
+    background-size: 100%;
+}
