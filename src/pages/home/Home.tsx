@@ -3,7 +3,10 @@ import './Home.scss'
 import { useState } from 'react'
 import GradientBG from '../../assets/gradiend-bg@2x.png'
 import axios from 'axios'
-
+import * as React from 'react'
+import { ImageContext } from '../../context/imageContext'
+import { ImageContextType, IImage } from '../../@types/image'
+import { Link } from 'react-router-dom'
 interface Image {
     id: string;
     urls: {
@@ -17,12 +20,22 @@ interface Results {
 }
 
 const Home: React.FC = () => {
+    const context = React.useContext(ImageContext)
+    if (!context) {
+        // Handle the case where context is null (e.g., by returning an error or fallback UI)
+        throw new Error("ImageContext must be used within an ImageProvider");
+    }
+    const { saveImage } = context as ImageContextType;
     const [query, setQuery] = useState('');
     const [enterKey, setEnterKey] = useState(false)
     const [results, setResults] = useState<Results | null>(null);
 
     const handleSearchChange = (newQuery: string) => {
         setQuery(newQuery);
+    };
+
+    const onClickImage = (image: Image) => {
+        saveImage({ imageObj: { alt_description: image.alt_description } });
     };
 
     const handleSearch = async () => {
@@ -62,15 +75,17 @@ const Home: React.FC = () => {
                 <SearchBar onChange={handleSearchChange} onKeyDown={handleKeyDown} />
             </section>
             <section>
-                {
-                    results?.results
-                    &&
-                    <div className='relative grid grid-rows-2 grid-flow-col gap-5 justify-center p-5'>
-                        {results.results.map(image => (
-                            <img key={image.id} src={image.urls.regular} alt={image.alt_description} className="w-full object-cover" />
-                        ))}
-                    </div>
-                }
+                {results?.results && (
+                    <Link to="/image">
+                        <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 p-5 auto-rows-[300px] m-auto	max-w-[1245px]">
+                            {results.results.map((image) => (
+                                <div key={image.id} className="relative w-full h-full" onClick={() => onClickImage(image)}>
+                                    <img src={image.urls.regular} alt={image.alt_description} className="w-full h-full object-cover" />
+                                </div>
+                            ))}
+                        </div>
+                    </Link>
+                )}
             </section>
         </div>
     )
