@@ -1,0 +1,6 @@
+.customWidthModal {
+    width: 35rem;
+    @media (max-width: 639px) {
+        width: 90vw !important;
+    }
+}

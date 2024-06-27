@@ -60,11 +60,11 @@ export default function Header(props: Props) {
             aria-label="open drawer"
             onClick={handleDrawerToggle}
           >
-            <img src={UnsplashIcon} alt="unsplash-icon"></img>
+            <a href='/'><img src={UnsplashIcon} alt="unsplash-icon"></img></a>
           </div>
           <Box>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
+              <Button key={item} sx={{ color: '#fff' }} href={item === 'Home' ? '/': '/collections'}>
                 {item}
               </Button>
             ))}

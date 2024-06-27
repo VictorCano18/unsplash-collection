@@ -3,18 +3,20 @@ import React from 'react';
 interface SearchBarProps {
   onChange: (query: string) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  classNameProps: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onChange, onKeyDown }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onChange, onKeyDown, placeholder, classNameProps }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
 
   return (
     <input
-      className="bg-white border-slate-100 shadow-md md:w-full w-9/12 h-16 p-5 rounded-md border-2 searchBarInputColor"
+      className={classNameProps}
       type="text"
-      placeholder="Enter your keywords..."
+      placeholder={placeholder}
       onChange={handleChange}
       onKeyDown={onKeyDown}
     />

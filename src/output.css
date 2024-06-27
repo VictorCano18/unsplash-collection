@@ -199,7 +199,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit;
+  font-family: "Be Vietnam Pro", sans-serif;
   /* 1 */
   font-feature-settings: inherit;
   /* 1 */

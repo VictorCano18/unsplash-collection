@@ -1,6 +1,18 @@
 export interface IImage {
     imageObj: {
-        alt_description: string
+        alt_description: string,
+        urls: {
+            regular: string,
+            small_s3: string
+        },
+        user: {
+            name: string,
+            profile_image: {
+                medium: string
+            }
+        },
+        created_at: string,
+        slug: string
     }
 }
 
